@@ -76,6 +76,7 @@
     "@types/node": "^22.19.3",
     "@types/qrcode": "^1.5.6",
     "@types/react": "~19.1.17",
+    "babel-preset-expo": "~54.0.0",
     "concurrently": "^9.2.1",
     "cross-env": "^7.0.3",
     "drizzle-kit": "^0.31.8",
