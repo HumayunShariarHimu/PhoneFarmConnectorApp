@@ -27,16 +27,29 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Build installable debug APK
+      - name: Embed production JavaScript bundle
+        run: |
+          mkdir -p android/app/src/main/assets android/app/src/main/res
+          npx expo export:embed \
+            --platform android \
+            --entry-file node_modules/expo-router/entry.js \
+            --bundle-output android/app/src/main/assets/index.android.bundle \
+            --assets-dest android/app/src/main/res
+          test -s android/app/src/main/assets/index.android.bundle
+      - name: Build self-contained release APK
         working-directory: android
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleRelease --no-daemon
+      - name: Verify APK contains the JavaScript bundle
+        run: |
+          test -s android/app/build/outputs/apk/release/app-release.apk
+          unzip -l android/app/build/outputs/apk/release/app-release.apk | grep -E 'assets/index.android.bundle|classes.dex'
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PhoneFarm-android-apk
-          path: android/app/build/outputs/apk/debug/*.apk
+          name: PhoneFarm-android-release-apk
+          path: android/app/build/outputs/apk/release/*.apk
       - name: Attach APK to GitHub release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: android/app/build/outputs/apk/debug/*.apk
+          files: android/app/build/outputs/apk/release/*.apk
