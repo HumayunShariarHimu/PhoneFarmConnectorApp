@@ -4,7 +4,7 @@ PhoneFarm is an owner-visible Android connector for authorized device QA and tes
 
 ## Download
 
-Use the repository's [download page](https://humayunshariarhimu.github.io/PhoneFarmConnectorApp/) or the [latest GitHub Release](https://github.com/HumayunShariarHimu/PhoneFarmConnectorApp/releases/latest).
+Use the live [download page](https://phonefarm-android-download-humayunshariarhimus-projects.vercel.app/) or the [latest GitHub Release](https://github.com/HumayunShariarHimu/PhoneFarmConnectorApp/releases/latest). The same `index.html` is kept at the repository root for reproducible deployment.
 
 ## Install and pair
 
