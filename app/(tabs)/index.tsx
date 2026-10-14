@@ -45,15 +45,30 @@ export default function HomeScreen() {
   const connectorDeviceId = connector?.deviceId;
 
   useEffect(() => {
+    let mounted = true;
     (async () => {
-      const [token, savedDevice, savedTargets] = await Promise.all([
-        AsyncStorage.getItem(TOKEN_KEY),
-        AsyncStorage.getItem(DEVICE_KEY),
-        AsyncStorage.getItem(TARGETS_KEY),
-      ]);
-      if (token && savedDevice) setConnector({ token, deviceId: savedDevice, status: "paired" });
-      if (savedTargets) setTargets(JSON.parse(savedTargets));
+      try {
+        const [token, savedDevice, savedTargets] = await Promise.all([
+          AsyncStorage.getItem(TOKEN_KEY),
+          AsyncStorage.getItem(DEVICE_KEY),
+          AsyncStorage.getItem(TARGETS_KEY),
+        ]);
+        if (!mounted) return;
+        if (token && savedDevice) setConnector({ token, deviceId: savedDevice, status: "paired" });
+        if (savedTargets) {
+          try {
+            const parsed = JSON.parse(savedTargets);
+            if (Array.isArray(parsed)) setTargets(parsed.filter((item) => item && typeof item.packageName === "string"));
+            else await AsyncStorage.removeItem(TARGETS_KEY);
+          } catch {
+            await AsyncStorage.removeItem(TARGETS_KEY);
+          }
+        }
+      } catch {
+        if (mounted) setMessage("Ready. Previous local settings could not be restored.");
+      }
     })();
+    return () => { mounted = false; };
   }, []);
 
   useEffect(() => {
@@ -134,7 +149,7 @@ export default function HomeScreen() {
 
   const launchTarget = (target: LaunchTarget) => {
     if (Platform.OS !== "android") return setMessage("Launching Android packages is available on Android builds only.");
-    try { IntentLauncher.openApplication(target.packageName); }
+    try { void IntentLauncher.openApplication(target.packageName); }
     catch { setMessage(`Android could not find ${target.packageName}. Install it first.`); }
   };
 

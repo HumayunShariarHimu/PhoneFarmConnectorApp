@@ -4,7 +4,9 @@ PhoneFarm is an owner-visible Android connector for authorized device QA and tes
 
 ## Download
 
-Use the live [download page](https://phonefarm-android-download-humayunshariarhimus-projects.vercel.app/) or the [latest GitHub Release](https://github.com/HumayunShariarHimu/PhoneFarmConnectorApp/releases/latest). The same `index.html` is kept at the repository root for reproducible deployment.
+Use the live [download page](https://phonefarm-android-download-humayunsharirhimus-projects.vercel.app/) or the [latest GitHub Release](https://github.com/HumayunShariarHimu/PhoneFarmConnectorApp/releases/latest). The same `index.html` is kept at the repository root for reproducible deployment.
+
+The v1.0.3 build includes the missing `expo-asset` native peer dependency required by `expo-audio`, aligned Expo SDK 54 package versions, and defensive recovery for malformed local launch-target storage. These changes address standalone APK startup crashes and preserve a usable screen if older local data is invalid.
 
 ## Install and pair
 
@@ -30,7 +32,7 @@ A standalone Android build is required for APK installation permissions. Expo Go
 The workflow at `.github/workflows/android-apk.yml` builds an installable debug APK after manual dispatch or a tag matching `connector-v*`. To create a release from a machine with write access:
 
 ```bash
-git tag connector-v1.0.2
+git tag connector-v1.0.3
 git push origin main --tags
 ```
 
