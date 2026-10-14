@@ -63,7 +63,7 @@ export default function HomeScreen() {
         const response = await fetch(`${API_URL}/api/connectors/heartbeat`, {
           method: "POST",
           headers: { "content-type": "application/json", authorization: `Bearer ${connectorToken}` },
-          body: JSON.stringify({ deviceId: connectorDeviceId, name: deviceName, platform: "android" }),
+          body: JSON.stringify({ deviceId: connectorDeviceId, name: deviceName, platform: "android", capabilities: ["pairing", "apk-install-user-consent", "app-launch"] }),
         });
         if (!response.ok) throw new Error("offline");
         setConnector((current) => current ? { ...current, status: "paired" } : current);
@@ -82,7 +82,7 @@ export default function HomeScreen() {
       const response = await fetch(`${API_URL}/api/connectors/pair`, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ code: code.trim(), deviceId, name: deviceName, platform: "android", consent: true }),
+        body: JSON.stringify({ code: code.trim(), deviceId, name: deviceName, platform: "android", consent: true, capabilities: ["pairing", "apk-install-user-consent", "app-launch"] }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Pairing failed");

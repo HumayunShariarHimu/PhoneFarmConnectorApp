@@ -1,4 +1,4 @@
-name: Build PhoneFarmConnectorApp APK
+name: Build PhoneFarm Android APK
 
 on:
   workflow_dispatch:
@@ -27,16 +27,16 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Build unsigned release APK
+      - name: Build installable debug APK
         working-directory: android
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleDebug
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PhoneFarmConnectorApp-apk
-          path: android/app/build/outputs/apk/release/*.apk
+          name: PhoneFarm-android-apk
+          path: android/app/build/outputs/apk/debug/*.apk
       - name: Attach APK to GitHub release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: android/app/build/outputs/apk/release/*.apk
+          files: android/app/build/outputs/apk/debug/*.apk
