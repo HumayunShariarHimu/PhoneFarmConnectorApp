@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhoneFarm Android — Download</title>
+  <meta name="description" content="Download and install the PhoneFarm Android connector for authorized device QA.">
+  <style>
+    :root { color-scheme: dark; --bg:#07090f; --panel:#0b1120; --line:#1b2b43; --text:#e4edf7; --muted:#8da0b8; --cyan:#00e5ff; --green:#00e676; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; background:radial-gradient(circle at 20% 0,#122640 0,var(--bg) 52%); color:var(--text); font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { max-width:860px; margin:auto; padding:56px 20px 72px; }
+    .eyebrow { color:var(--cyan); font-size:12px; font-weight:800; letter-spacing:3px; }
+    h1 { margin:14px 0 12px; color:#fff; font-size:clamp(36px,8vw,68px); line-height:1.02; }
+    h2 { color:#fff; font-size:22px; margin:0 0 10px; }
+    p, li { color:var(--muted); }
+    .lead { max-width:700px; font-size:18px; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin:28px 0 34px; }
+    a.button { display:inline-block; padding:12px 17px; border-radius:9px; font-weight:800; text-decoration:none; }
+    .primary { background:var(--cyan); color:#001018; }
+    .secondary { background:var(--panel); border:1px solid #226079; color:var(--cyan); }
+    .card { margin-top:14px; padding:24px; border:1px solid var(--line); border-radius:15px; background:rgba(11,17,32,.84); }
+    code { padding:2px 6px; border-radius:5px; background:#111d2e; color:#b8f7ff; }
+    .note { border-left:3px solid var(--green); padding-left:14px; }
+    footer { margin-top:34px; color:#52657f; font-size:13px; }
+    footer a { color:var(--cyan); }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">PHONEFARM / ANDROID CONNECTOR</div>
+  <h1>PhoneFarm Android</h1>
+  <p class="lead">An owner-visible Android connector for authorized device quality assurance. Pair a real Android phone with PhoneFarmZone, select APKs through Android’s standard installer, and launch approved test targets.</p>
+  <div class="actions">
+    <a class="button primary" href="https://github.com/HumayunShariarHimu/PhoneFarmConnectorApp/releases/latest">Download latest APK</a>
+    <a class="button secondary" href="https://github.com/HumayunShariarHimu/PhoneFarmConnectorApp">View source repository</a>
+  </div>
+  <section class="card">
+    <h2>Install the APK</h2>
+    <ol>
+      <li>Tap <strong>Download latest APK</strong> and download the APK asset from GitHub Releases.</li>
+      <li>Open the downloaded file on your Android phone. If Android asks, enable <strong>Allow from this source</strong> for the browser or file manager that opened the APK.</li>
+      <li>Review the Android installer screen and approve the installation. The app never performs a silent install.</li>
+      <li>Open PhoneFarm. In PhoneFarmZone, sign in as the owner and choose <strong>Pair Android</strong>.</li>
+      <li>Enter the one-time six-digit code in PhoneFarm. Pairing requires explicit owner consent and can be revoked at any time.</li>
+    </ol>
+  </section>
+  <section class="card">
+    <h2>What this build supports</h2>
+    <ul>
+      <li>Secure owner pairing and heartbeat status.</li>
+      <li>User-approved APK handoff to Android Package Installer.</li>
+      <li>Launching an already-installed app by package name.</li>
+      <li>Authorized QA coordination with the PhoneFarmZone dashboard.</li>
+    </ul>
+  </section>
+  <section class="card note">
+    <h2>Important platform boundary</h2>
+    <p>This is an authorized QA connector, not a hidden-access tool or a full Android OS clone. A normal Android app cannot create ten independent Android phones inside one host phone. For a real multi-device lab, use multiple physical Android devices or emulator hosts.</p>
+  </section>
+  <footer>PhoneFarm · <a href="https://github.com/HumayunShariarHimu/PhoneFarmConnectorApp/releases">All releases</a> · <a href="https://github.com/HumayunShariarHimu">Humayun Shariar Himu</a></footer>
+</main>
+</body>
+</html>
